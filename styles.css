@@ -4,15 +4,27 @@
 
 body {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: aquamarine;
 }
 
-h1 {
-  text-align: center;
+.title {
+  margin-block: 8px
+}
+
+.dimensions-button {
+    padding: 4px 12px;
+    background-color:lightcoral;
+    font-size: 18px;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .container {
-  margin: 0 auto;
+  margin: 16px auto;
   width: 402px;
   height: 402px;
   display: flex;
