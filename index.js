@@ -1,10 +1,10 @@
-const container = document.querySelector(".container");
-const containerWidth = container.offsetWidth - 2;
-const dimensionsButton = document.querySelector("button");
-let sideOfDivs = 16;
-let divSideWidth = containerWidth / sideOfDivs;
+const grid = document.querySelector(".grid");
+const gridWidth = grid.offsetWidth - 16;
+const dimensionButton = document.querySelector("button");
+let gridDimension = 16;
+let divDimension = gridWidth / gridDimension;
 
-dimensionsButton.addEventListener("click", () => {
+dimensionButton.addEventListener("click", () => {
   const newDimension = +prompt(
     "How many divs do you want per row/column: (num < 100) "
   );
@@ -13,33 +13,32 @@ dimensionsButton.addEventListener("click", () => {
     return;
   }
   clearBoard();
-  sideOfDivs = newDimension;
-  divSideWidth = containerWidth / sideOfDivs;
+  gridDimension = newDimension;
+  divDimension = gridWidth / gridDimension;
   drawBoard();
 });
 
 function drawBoard() {
-  for (let i = 0; i < sideOfDivs; ++i) {
-    for (let j = 0; j < sideOfDivs; ++j) {
-      const div = document.createElement("div");
-      div.style.border = "1px solid black";
-      div.style.width = `${divSideWidth}px`;
-      div.style.height = `${divSideWidth}px`;
-      div.style.background = "crimson";
-      div.addEventListener("mouseover", function (e) {
-        // e.target.style.background = "blueviolet";
+  for (let i = 0; i < gridDimension; ++i) {
+    const row = document.createElement("div");
+    row.classList.add("row");
+    for (let j = 0; j < gridDimension; ++j) {
+      const column = document.createElement("div");
+      column.classList.add("column");
+      column.style.width = `${divDimension}px`;
+      column.style.height = `${divDimension}px`;
+      column.addEventListener("mouseover", function (e) {
         this.style.background = "blueviolet";
       });
-      container.append(div);
+      row.append(column);
     }
+    grid.append(row);
   }
 }
 
 function clearBoard() {
-  for (let i = 0; i < sideOfDivs; ++i) {
-    for (let j = 0; j < sideOfDivs; ++j) {
-      container.removeChild(container.lastChild);
-    }
+  for (let i = 0; i < gridDimension; ++i) {
+    grid.removeChild(grid.lastChild);
   }
 }
 
