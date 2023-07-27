@@ -6,7 +6,7 @@ let divDimension = gridWidth / gridDimension;
 
 dimensionButton.addEventListener("click", () => {
   const newDimension = +prompt(
-    "How many divs do you want per row/column: (num < 100) "
+    "How many divs do you want per row/column: (num <= 100) "
   );
   if (newDimension < 1 || newDimension > 100 || Number.isNaN(newDimension)) {
     alert("Number must be less than or equal to 100");
@@ -27,8 +27,9 @@ function drawBoard() {
       column.classList.add("column");
       column.style.width = `${divDimension}px`;
       column.style.height = `${divDimension}px`;
-      column.addEventListener("mouseover", function (e) {
-        this.style.background = "blueviolet";
+      column.addEventListener("mouseover", function () {
+        // this.style.background = "blueviolet";
+        this.style.background = generateRandomColor();
       });
       row.append(column);
     }
@@ -40,6 +41,12 @@ function clearBoard() {
   for (let i = 0; i < gridDimension; ++i) {
     grid.removeChild(grid.lastChild);
   }
+}
+
+function generateRandomColor() {
+  return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
+    Math.random() * 256
+  )}, ${Math.floor(Math.random() * 256)})`;
 }
 
 drawBoard();
