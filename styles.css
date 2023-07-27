@@ -13,7 +13,10 @@ h1 {
 
 .container {
   margin: 0 auto;
-  width: 496px;
-  height: 496px;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-content: start;
+  flex-wrap: wrap;
   background-color: antiquewhite;
 }
