@@ -24,8 +24,8 @@ body {
 }
 
 .grid {
-  width: 416px;
-  height: 416px;
+  width: 300px;
+  height: 300px;
   margin: 16px auto;
   padding: 6px;
   display: flex;
@@ -44,4 +44,18 @@ body {
 .column {
   background-color: crimson;
   border: 1px solid black;
+}
+
+@media (min-width: 500px) {
+  .grid {
+    width: 450px;
+    height: 450px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    width: 750px;
+    height: 750px;
+  }
 }

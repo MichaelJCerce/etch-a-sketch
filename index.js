@@ -1,22 +1,14 @@
 const grid = document.querySelector(".grid");
-const gridWidth = grid.offsetWidth - 16;
 const dimensionButton = document.querySelector("button");
+const mediumQuery = window.matchMedia("(min-width: 500px)");
+const largeQuery = window.matchMedia("(min-width: 1000px)");
+
+let gridWidth =
+  grid.offsetWidth -
+  2 * parseFloat(window.getComputedStyle(grid).paddingTop) -
+  2 * parseFloat(window.getComputedStyle(grid).borderTopWidth);
 let gridDimension = 16;
 let divDimension = gridWidth / gridDimension;
-
-dimensionButton.addEventListener("click", () => {
-  const newDimension = +prompt(
-    "How many divs do you want per row/column: (num <= 100) "
-  );
-  if (newDimension < 1 || newDimension > 100 || Number.isNaN(newDimension)) {
-    alert("Number must be less than or equal to 100");
-    return;
-  }
-  clearBoard();
-  gridDimension = newDimension;
-  divDimension = gridWidth / gridDimension;
-  drawBoard();
-});
 
 function drawBoard() {
   for (let i = 0; i < gridDimension; ++i) {
@@ -37,16 +29,45 @@ function drawBoard() {
   }
 }
 
-function clearBoard() {
-  for (let i = 0; i < gridDimension; ++i) {
-    grid.removeChild(grid.lastChild);
-  }
-}
-
 function generateRandomColor() {
   return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
     Math.random() * 256
   )}, ${Math.floor(Math.random() * 256)})`;
 }
+
+function updateGridSize() {
+  gridWidth =
+    grid.offsetWidth -
+    2 * parseFloat(window.getComputedStyle(grid).paddingTop) -
+    2 * parseFloat(window.getComputedStyle(grid).borderTopWidth);
+  divDimension = gridWidth / gridDimension;
+
+  for (let i = 0; i < gridDimension; ++i) {
+    const row = grid.childNodes[i];
+    console.dir(grid.childNodes);
+    for (let j = 0; j < gridDimension; ++j) {
+      row.childNodes[j].style.width = `${divDimension}px`;
+      row.childNodes[j].style.height = `${divDimension}px`;
+    }
+  }
+}
+
+function updateGridDimensions() {
+  const newDimension = +prompt(
+    "How many divs do you want per row/column: (num <= 100) "
+  );
+  if (newDimension < 1 || newDimension > 100 || Number.isNaN(newDimension)) {
+    alert("Number must be less than or equal to 100");
+    return;
+  }
+  grid.innerHTML = "";
+  gridDimension = newDimension;
+  divDimension = gridWidth / gridDimension;
+  drawBoard();
+}
+
+mediumQuery.addEventListener("change", updateGridSize);
+largeQuery.addEventListener("change", updateGridSize);
+dimensionButton.addEventListener("click", updateGridDimensions);
 
 drawBoard();
