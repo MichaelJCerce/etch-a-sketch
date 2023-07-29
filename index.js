@@ -1,15 +1,19 @@
 const grid = document.querySelector(".grid");
-const changeDimensionsButton = document.querySelector("button");
+const squaresPerSideButton = document.querySelector(".squares-button");
 
+function generateRandomColor() {
+  return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
+    Math.random() * 256
+  )}, ${Math.floor(Math.random() * 256)})`;
+}
 
-
-function drawBoard(divsPerSide) {
-  for (let i = 0; i < divsPerSide; ++i) {
+function drawBoard(squaresPerSide) {
+  for (let i = 0; i < squaresPerSide; ++i) {
     const row = document.createElement("div");
 
     row.classList.add("row");
-    
-    for (let j = 0; j < divsPerSide; ++j) {
+
+    for (let j = 0; j < squaresPerSide; ++j) {
       const column = document.createElement("div");
 
       column.classList.add("column");
@@ -25,30 +29,22 @@ function drawBoard(divsPerSide) {
   }
 }
 
-function generateRandomColor() {
-  return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
-    Math.random() * 256
-  )}, ${Math.floor(Math.random() * 256)})`;
-}
-
-function updateDivsPerSide() {
-  const newDivDimension = +prompt(
-    "How many divs do you want per row/column: (num <= 100) "
-  );
+function updateSquaresPerSide() {
+  const updatedSquaresPerSide = +prompt("how many squares per side [1 - 100]?");
 
   if (
-    newDivDimension < 1 ||
-    newDivDimension > 100 ||
-    Number.isNaN(newDivDimension)
+    updatedSquaresPerSide < 1 ||
+    updatedSquaresPerSide > 100 ||
+    Number.isNaN(updatedSquaresPerSide)
   ) {
-    alert("Number must be less than or equal to 100");
+    alert("invalid input. number must be between [1 - 100].");
     return;
   }
 
   grid.innerHTML = "";
-  drawBoard(newDivDimension);
+  drawBoard(updatedSquaresPerSide);
 }
 
-changeDimensionsButton.addEventListener("click", updateDivsPerSide);
+squaresPerSideButton.addEventListener("click", updateSquaresPerSide);
 
 drawBoard(16);
