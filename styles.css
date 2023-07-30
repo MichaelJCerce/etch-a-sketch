@@ -8,13 +8,13 @@ body {
 
 .title {
   margin-block: 8px;
-  font-size: 46px;
+  font-size: clamp(1rem, 2vw + 1rem, 2.8rem);
   color: seashell;
 }
 
 .squares-button {
-  padding: 4px 10px;
-  font-size: 16px;
+  padding: 0.5em 1em;
+  font-size: clamp(10px, 1vw + 3px, 16px);
   border: 1px solid black;
   border-radius: 4px;
   background-color: seashell;
@@ -22,12 +22,12 @@ body {
 }
 
 .grid {
-  width: 300px;
-  height: 300px;
+  width: clamp(275px, 50vw, 700px);
+  height: clamp(275px, 50vw, 700px);
   margin: 16px auto;
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .row {
@@ -39,18 +39,4 @@ body {
   flex: 1;
   background-color: crimson;
   border: 1px solid black;
-}
-
-@media (min-width: 600px) {
-  .grid {
-    width: 500px;
-    height: 500px;
-  }
-}
-
-@media (min-width: 1000px) {
-  .grid {
-    width: 700px;
-    height: 700px;
-  }
 }

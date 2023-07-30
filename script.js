@@ -18,7 +18,6 @@ function drawBoard(squaresPerSide) {
 
       column.classList.add("column");
       column.addEventListener("mouseover", function () {
-        // this.style.background = "blueviolet";
         this.style.background = generateRandomColor();
       });
 
